@@ -120,6 +120,7 @@ class IndicesClient(NamespacedClient):
         """
         if index in SKIP_IN_PATH:
             raise ValueError("Empty value passed for a required argument 'index'.")
+        params["include_type_name"] = "true"
         return self.transport.perform_request(
             "PUT", _make_path(index), params=params, body=body
         )
@@ -157,6 +158,7 @@ class IndicesClient(NamespacedClient):
         """
         if index in SKIP_IN_PATH:
             raise ValueError("Empty value passed for a required argument 'index'.")
+        params["include_type_name"] = "true"
         return self.transport.perform_request(
             "GET", _make_path(index, feature), params=params
         )
@@ -348,6 +350,7 @@ class IndicesClient(NamespacedClient):
         for param in (body,):
             if param in SKIP_IN_PATH:
                 raise ValueError("Empty value passed for a required argument.")
+        params["include_type_name"] = "true"
         return self.transport.perform_request(
             "PUT", _make_path(index, "_mapping", doc_type), params=params, body=body
         )
@@ -379,6 +382,7 @@ class IndicesClient(NamespacedClient):
         :arg include_type_name: Specify whether requests and responses should include a
             type name (default: depends on Elasticsearch version).
         """
+        params["include_type_name"] = "true"
         return self.transport.perform_request(
             "GET", _make_path(index, "_mapping", doc_type), params=params
         )
@@ -416,6 +420,7 @@ class IndicesClient(NamespacedClient):
         """
         if fields in SKIP_IN_PATH:
             raise ValueError("Empty value passed for a required argument 'fields'.")
+        params["include_type_name"] = "true"
         return self.transport.perform_request(
             "GET",
             _make_path(index, "_mapping", doc_type, "field", fields),
@@ -555,6 +560,7 @@ class IndicesClient(NamespacedClient):
         for param in (name, body):
             if param in SKIP_IN_PATH:
                 raise ValueError("Empty value passed for a required argument.")
+        params["include_type_name"] = "true"
         return self.transport.perform_request(
             "PUT", _make_path("_template", name), params=params, body=body
         )
@@ -593,6 +599,7 @@ class IndicesClient(NamespacedClient):
         :arg include_type_name: Specify whether requests and responses should include a
             type name (default: depends on Elasticsearch version).
         """
+        params["include_type_name"] = "true"
         return self.transport.perform_request(
             "GET", _make_path("_template", name), params=params
         )
@@ -1100,6 +1107,7 @@ class IndicesClient(NamespacedClient):
         """
         if alias in SKIP_IN_PATH:
             raise ValueError("Empty value passed for a required argument 'alias'.")
+        params["include_type_name"] = "true"
         return self.transport.perform_request(
             "POST", _make_path(alias, "_rollover", new_index), params=params, body=body
         )

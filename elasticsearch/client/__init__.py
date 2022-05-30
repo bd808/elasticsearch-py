@@ -862,6 +862,7 @@ class Elasticsearch(object):
         :arg version: Specify whether to return document version as part of a
             hit
         """
+        params["rest_total_hits_as_int"] = "true"
         # from is a reserved word so it cannot be used, use from_ instead
         if "from_" in params:
             params["from"] = params.pop("from_")
@@ -1301,6 +1302,7 @@ class Elasticsearch(object):
         :arg typed_keys: Specify whether aggregation and suggester names should
             be prefixed by their respective types in the response
         """
+        params["rest_total_hits_as_int"] = "true"
         return self.transport.perform_request(
             "GET",
             _make_path(index, doc_type, "_search", "template"),
@@ -1383,6 +1385,7 @@ class Elasticsearch(object):
             in the response. This param is added version 6.x to handle mixed cluster queries where nodes
             are in multiple versions (7.0 and 6.latest)
         """
+        params["rest_total_hits_as_int"] = "true"
         if scroll_id in SKIP_IN_PATH and body in SKIP_IN_PATH:
             raise ValueError("You need to supply scroll_id or body.")
         elif scroll_id and not body:
@@ -1622,6 +1625,7 @@ class Elasticsearch(object):
         """
         if body in SKIP_IN_PATH:
             raise ValueError("Empty value passed for a required argument 'body'.")
+        params["rest_total_hits_as_int"] = "true"
         return self.transport.perform_request(
             "GET",
             _make_path(index, doc_type, "_msearch"),
@@ -1882,6 +1886,7 @@ class Elasticsearch(object):
         """
         if body in SKIP_IN_PATH:
             raise ValueError("Empty value passed for a required argument 'body'.")
+        params["rest_total_hits_as_int"] = "true"
         return self.transport.perform_request(
             "GET",
             _make_path(index, doc_type, "_msearch", "template"),
